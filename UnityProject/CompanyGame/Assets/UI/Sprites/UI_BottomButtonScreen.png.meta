@@ -106,16 +106,16 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
-      alignment: 0
+        width: 128
+        height: 128
+      alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 927f86243c204d54d806efac86c4781c
+      spriteID: 563a535f4b708ee4baedd3d350ffd259
       internalID: -6646248113614833015
       vertices: []
       indices: 
@@ -125,18 +125,18 @@ TextureImporter:
       name: UI_BottomButtonScreen_1
       rect:
         serializedVersion: 2
-        x: 256
+        x: 128
         y: 0
-        width: 256
-        height: 256
-      alignment: 0
+        width: 128
+        height: 128
+      alignment: 6
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e36e19f83c8e3f843b1f8a954daa5b3e
+      spriteID: 897c197078c824f4bb739491eac05af2
       internalID: 4049463219701394414
       vertices: []
       indices: 
