@@ -8,6 +8,24 @@ TextureImporter:
   - first:
       213: 4049463219701394414
     second: UI_BottomButtonScreen_1
+  - first:
+      213: -3248692990094366379
+    second: UI_BottomButtonScreen_2
+  - first:
+      213: 94243917088175286
+    second: UI_BottomButtonScreen_3
+  - first:
+      213: -4474212001197576997
+    second: UI_BottomButtonScreen_4
+  - first:
+      213: -5756241531659217428
+    second: UI_BottomButtonScreen_5
+  - first:
+      213: -3925708545490866861
+    second: UI_BottomButtonScreen_6
+  - first:
+      213: 4473083662067354361
+    second: UI_BottomButtonScreen_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -105,6 +123,132 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 384
+        width: 128
+        height: 128
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a15086ff85c5c54d9e3a1c9e564f984
+      internalID: -6646248113614833015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_BottomButtonScreen_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 128
+        height: 128
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44fd759f756a6154a9909267d0a4e721
+      internalID: 4049463219701394414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_BottomButtonScreen_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 128
+        height: 128
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f50f8cfb05a3bda448d08bc916abe285
+      internalID: -3248692990094366379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_BottomButtonScreen_3
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 128
+        height: 128
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e12c69f3b9891744390da64110ddeec6
+      internalID: 94243917088175286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_BottomButtonScreen_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 128
+        height: 128
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a320c3bdf1817142a596add1f13fa67
+      internalID: -4474212001197576997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_BottomButtonScreen_5
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 128
+        height: 128
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d1b2bc892d708f49bf871dd1bb7e893
+      internalID: -5756241531659217428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_BottomButtonScreen_6
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
         width: 128
         height: 128
@@ -115,14 +259,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 563a535f4b708ee4baedd3d350ffd259
-      internalID: -6646248113614833015
+      spriteID: bcab5cb7e8632bd4aa226f088cb3ab2e
+      internalID: -3925708545490866861
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: UI_BottomButtonScreen_1
+      name: UI_BottomButtonScreen_7
       rect:
         serializedVersion: 2
         x: 128
@@ -136,8 +280,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 897c197078c824f4bb739491eac05af2
-      internalID: 4049463219701394414
+      spriteID: 7fb738f4485310847a77269c1f8bdd5c
+      internalID: 4473083662067354361
       vertices: []
       indices: 
       edges: []
