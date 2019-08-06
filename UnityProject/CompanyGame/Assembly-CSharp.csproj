@@ -63,7 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\UI\BorderAutosizing.cs" />
-    <Compile Include="Assets\UI\Sprites\ButtonsController.cs" />
+    <Compile Include="Assets\UI\ButtonsController.cs" />
     <Compile Include="Assets\UI\UIAutosizing.cs" />
     <Compile Include="Assets\UI\UIAutosizingEditor.cs" />
     <Reference Include="Unity.Timeline.Editor">
