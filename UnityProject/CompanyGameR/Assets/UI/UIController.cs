@@ -5,8 +5,13 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    public float UIScale = 1f;
+    static public float UIScale = 1f;
+
+    static private float buttonHeight = 10f;
+
     private const float ReferenceSize = 128f;
+
+    static public float ButtonHeight { get => buttonHeight; }
 
     // Start is called before the first frame update
     void Start()
@@ -14,8 +19,8 @@ public class UIController : MonoBehaviour
         float UISize = UIScale * ReferenceSize;
         Transform bottomBezel = this.transform.Find("BottomBezel");
         bottomBezel.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, UISize);
-        
-        bottomBezel.GetComponent<Image>().color = ColorPool.getBezelColorFromHex(ColorPool.HEX_PRIMARYBEZELS);
+        buttonHeight = 3f;
+        bottomBezel.GetComponent<Image>().color = ColorProvider.GetBezelColorFromHex(ColorProvider.COLORHEXCODE_CONSTRUCTION);
     }
 
     // Update is called once per frame
