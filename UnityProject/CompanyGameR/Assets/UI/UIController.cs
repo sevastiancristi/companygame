@@ -18,9 +18,9 @@ public class UIController : MonoBehaviour
     {
         float UISize = UIScale * ReferenceSize;
         Transform bottomBezel = this.transform.Find("BottomBezel");
-        bottomBezel.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, UISize);
+        //bottomBezel.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, UISize);
         buttonHeight = 3f;
-        bottomBezel.GetComponent<Image>().color = ColorProvider.GetBezelColorFromHex(ColorProvider.COLORHEXCODE_CONSTRUCTION);
+       // bottomBezel.GetComponent<Image>().color = ColorProvider.GetBezelColorFromHex(ColorProvider.COLORHEXCODE_CONSTRUCTION);
     }
 
     // Update is called once per frame
