@@ -8,7 +8,6 @@ public class RoundButtonsMenuController : MonoBehaviour
     public GameObject buttonGameObjectPrefab;
     public List<GameObject> buttonsGameObjectList;
 
-
     private int _buttonsCount = 0;
     public int ButtonsCount
     {
@@ -64,7 +63,7 @@ public class RoundButtonsMenuController : MonoBehaviour
         }
     }
 
-    private ColorProvider.Department _departmentColor = ColorProvider.Department.RESEARCHANDDEVELOPMENT;
+    private ColorProvider.Department _departmentColor;
     public ColorProvider.Department DepartmentColor
     {
         get => _departmentColor;
@@ -96,6 +95,26 @@ public class RoundButtonsMenuController : MonoBehaviour
             adjustBezelHeight();
         }
     }
+
+    private bool _isExclusive = false;
+    public bool IsExclusive
+    {
+        get => _isExclusive;
+        set
+        {
+            if (_isExclusive == true)
+            {
+                Debug.LogError("Already set to exclusive!");
+                return;
+            }
+
+            if (value == false)
+                return;
+
+            setExclusive();
+        }
+    }
+
     private Transform bezelTransform;
     private Transform leftFadingBezelTransform;
     private Transform rightFadingBezelTransform;
@@ -108,15 +127,6 @@ public class RoundButtonsMenuController : MonoBehaviour
     {
         InitTransformMembers();
         buttonsGameObjectList = new List<GameObject>();
-
-        //TODO: Remove testing
-        ButtonsCount = 5;
-        ButtonSize = 50f;
-        ButtonHeight = 5f;
-        ButtonSpacing = 100f;
-        ToplineBezelHeight = 2f;
-        BezelHeight = 50f;
-        DepartmentColor = ColorProvider.Department.INFORMATINOTECHNOLOGY;
     }
 
     void InitTransformMembers()
@@ -137,7 +147,9 @@ public class RoundButtonsMenuController : MonoBehaviour
             return;
         }
 
-        for(int i=0; i< value; i++)
+        InitTransformMembers();
+
+        for (int i=0; i< value; i++)
         {
             GameObject go = Instantiate(buttonGameObjectPrefab, new Vector3(i, 0f, 0f), Quaternion.identity, toplineBezelTransform);
             go.name = "Button_" + i;
@@ -157,7 +169,9 @@ public class RoundButtonsMenuController : MonoBehaviour
             return;
         }
 
-        for( int i = 0; i < buttonsGameObjectList.Count; i++)
+        InitTransformMembers();
+
+        for ( int i = 0; i < buttonsGameObjectList.Count; i++)
         {
             buttonsGameObjectList[i].GetComponent<RoundButtonController>().ButtonSize = _buttonSize;
         }
@@ -170,6 +184,8 @@ public class RoundButtonsMenuController : MonoBehaviour
             Debug.LogError(this + ":\n Buttons count and size must be set first!");
             return;
         }
+
+        InitTransformMembers();
 
         Vector3 bezelSize = bezelTransform.GetComponent<RectTransform>().sizeDelta;
         bezelSize.x = (_buttonsCount - 1) * _buttonSpacing + _buttonSize;
@@ -191,6 +207,8 @@ public class RoundButtonsMenuController : MonoBehaviour
             return;
         }
 
+        InitTransformMembers();
+
         leftFadingBezelTransform.GetComponent<RectTransform>().sizeDelta = new Vector3(_fadingBezelWidth, 0f, 0f);
         rightFadingBezelTransform.GetComponent<RectTransform>().sizeDelta = new Vector3(_fadingBezelWidth, 0f, 0f);
         leftFadingToplineBezelTransform.GetComponent<RectTransform>().sizeDelta = new Vector3(_fadingBezelWidth, 0f, 0f);
@@ -210,6 +228,8 @@ public class RoundButtonsMenuController : MonoBehaviour
             return;
         }
 
+        InitTransformMembers();
+
         Vector3 toplineBezelSize = toplineBezelTransform.GetComponent<RectTransform>().sizeDelta;
         toplineBezelSize.y = _toplineBezelHeight;
         toplineBezelTransform.GetComponent<RectTransform>().sizeDelta = toplineBezelSize;
@@ -221,14 +241,18 @@ public class RoundButtonsMenuController : MonoBehaviour
 
     void adjustDepartmentColor()
     {
-        bezelTransform.GetComponent<Image>().color = ColorProvider.GetBezelColorFromHex(ColorProvider.Colors[(int)_departmentColor][(int)ColorProvider.ColorType.FACE]);
-        leftFadingBezelTransform.GetComponent<Image>().color = ColorProvider.GetBezelColorFromHex(ColorProvider.Colors[(int)_departmentColor][(int)ColorProvider.ColorType.FACE]);
-        rightFadingBezelTransform.GetComponent<Image>().color = ColorProvider.GetBezelColorFromHex(ColorProvider.Colors[(int)_departmentColor][(int)ColorProvider.ColorType.FACE]);
+
         if(_buttonsCount <= 0)
         {
             Debug.LogError(this + ":\n Buttons count must be set first!");
             return;
         }
+
+        InitTransformMembers();
+
+        bezelTransform.GetComponent<Image>().color = ColorProvider.GetBezelColorFromHex(ColorProvider.Colors[(int)_departmentColor][(int)ColorProvider.ColorType.FACE]);
+        leftFadingBezelTransform.GetComponent<Image>().color = ColorProvider.GetBezelColorFromHex(ColorProvider.Colors[(int)_departmentColor][(int)ColorProvider.ColorType.FACE]);
+        rightFadingBezelTransform.GetComponent<Image>().color = ColorProvider.GetBezelColorFromHex(ColorProvider.Colors[(int)_departmentColor][(int)ColorProvider.ColorType.FACE]);
 
         for (int i = 0; i < buttonsGameObjectList.Count; i++)
         {
@@ -244,6 +268,8 @@ public class RoundButtonsMenuController : MonoBehaviour
             return;
         }
 
+        InitTransformMembers();
+
         for (int i = 0; i < buttonsGameObjectList.Count; i++)
         {
             buttonsGameObjectList[i].GetComponent<RoundButtonController>().ButtonHeight = _buttonHeight;
@@ -252,8 +278,31 @@ public class RoundButtonsMenuController : MonoBehaviour
 
     void adjustBezelHeight()
     {
+        InitTransformMembers();
+
         Vector3 bezelSize = bezelTransform.GetComponent<RectTransform>().sizeDelta;
         bezelSize.y = _bezelHeight;
         bezelTransform.GetComponent<RectTransform>().sizeDelta = bezelSize;
+    }
+
+    void setExclusive()
+    {
+        for(int i=0; i < buttonsGameObjectList.Count; i++)
+        {
+            List<RoundButtonController> altList = new List<RoundButtonController>();
+            for(int j=0; j < buttonsGameObjectList.Count; j++)
+            {
+                if (j == i)
+                    continue;
+                altList.Add(buttonsGameObjectList[j].GetComponent<RoundButtonController>());
+            }
+            buttonsGameObjectList[i].transform.GetComponent<RoundButtonController>().SelectCallback += () => {
+                for(int j=0; j < altList.Count; j++)
+                {
+                    if (altList[j].IsSelected)
+                        altList[j].Unselect();
+                }
+            };
+        }
     }
 }

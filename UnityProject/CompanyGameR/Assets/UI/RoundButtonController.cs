@@ -5,8 +5,14 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoundButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IPointerDownHandler
+public class RoundButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    public Action SelectCallback;
+    public Action UnselectCallback;
+
+    private bool _isSelected = false;
+    public bool IsSelected { get => _isSelected; }
+
     private ColorProvider.Department _departmentColor;
     public ColorProvider.Department DepartmentColor
     {
@@ -63,8 +69,6 @@ public class RoundButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
     }
 
 
-    public Action SelectCallback;
-    public Action UnselectCallback;
 
     private Vector3 buttonNotPressedHeight;
     private Vector3 buttonPressedHeight;
@@ -80,74 +84,77 @@ public class RoundButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
     private Transform bezelTransform;
     private Transform leftBezelTransform;
     private Transform rightBezelTransform;
+    private Transform infoBoxTransform;
 
-    private bool IsSelected = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
         InitTransformMembers();
+        bezelTransform.gameObject.SetActive(false);
+        infoBoxTransform.gameObject.SetActive(false);
     }
 
     //TODO: Optimize if needed
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(!IsSelected)
-            functionTransform.GetComponent<Image>().color = functionHighlightColor;
+        infoBoxTransform.gameObject.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!IsSelected)
-        {
-            functionTransform.GetComponent<Image>().color = functionColor;
-            faceTransform.GetComponent<RectTransform>().localPosition = buttonNotPressedHeight;
-        }
+        infoBoxTransform.gameObject.SetActive(false);
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        faceTransform.GetComponent<RectTransform>().localPosition = buttonPressedHeight;
-    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (IsSelected)
+        if (eventData.button == PointerEventData.InputButton.Left)
         {
-            this.Unselect();
-        }
-        else
-        {
-            this.Select();
+            if (_isSelected)
+            {
+                this.Unselect();
+            }
+            else
+            {
+                this.Select();
+            }
         }
     }
 
     public void Select()
     {
-        if (!IsSelected)
+        if (!_isSelected)
         {
-            bezelTransform.gameObject.SetActive(true);
+            Press();
             SelectCallback();
-            IsSelected = true;
         }
     }
 
     public void Unselect()
     {
-        if (IsSelected)
+        if (_isSelected)
         {
-            bezelTransform.gameObject.SetActive(false);
-            faceTransform.GetComponent<RectTransform>().localPosition = buttonNotPressedHeight;
+            Unpress();
             UnselectCallback();
-            IsSelected = false;
         }
     }
 
     public void Press()
     {
+        bezelTransform.gameObject.SetActive(true);
         functionTransform.GetComponent<Image>().color = functionHighlightColor;
         faceTransform.GetComponent<RectTransform>().localPosition = buttonPressedHeight;
-        IsSelected = true;
+        _isSelected = true;
+    }
+
+    public void Unpress()
+    {
+        bezelTransform.gameObject.SetActive(false);
+        functionTransform.GetComponent<Image>().color = functionColor;
+        faceTransform.GetComponent<RectTransform>().localPosition = buttonNotPressedHeight;
+        _isSelected = false;
     }
 
     private void InitTransformMembers()
@@ -158,6 +165,7 @@ public class RoundButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
         bezelTransform = this.transform.Find("Bezel");
         leftBezelTransform = this.transform.Find("Bezel").Find("LeftBezel");
         rightBezelTransform = this.transform.Find("Bezel").Find("RightBezel");
+        infoBoxTransform = this.transform.Find("InfoBox");
     }
 
     private void adjustButtonHeight()
@@ -166,6 +174,7 @@ public class RoundButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
         buttonNotPressedHeight = new Vector3(0f, _buttonHeight, 0f);
         buttonPressedHeight = new Vector3(0f, 0f, 0f);
         faceTransform.GetComponent<RectTransform>().localPosition = buttonNotPressedHeight;
+        infoBoxTransform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, _buttonHeight, 0f);
     }
 
     private void adjustDepartmentColor()
@@ -181,13 +190,15 @@ public class RoundButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
         leftBezelTransform.GetComponent<Image>().color = faceColor;
         rightBezelTransform.GetComponent<Image>().color = faceColor;
 
-        bezelTransform.gameObject.SetActive(false);
+        
     }
 
     //This should always be recalled when resizing the UI
     private void adjustButtonSize()
     {
-        this.transform.GetComponent<RectTransform>().sizeDelta = new Vector3(_buttonSize, _buttonSize, 0f);
+        InitTransformMembers();
+        shadowTransform.GetComponent<RectTransform>().sizeDelta = new Vector3(_buttonSize, _buttonSize, 0f);
+        infoBoxTransform.GetComponent<RectTransform>().sizeDelta = new Vector3(_buttonSize * 2, _buttonSize, 0f);
     }
 
     private void adjustBezelWidth()

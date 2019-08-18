@@ -6,6 +6,7 @@ public class ColorProvider
 {
 
 
+    private static string[] COLORHEXCODE_CONSTRUCTION = { "616161", "494949", "B7B7B7" };
     private static string[] COLORHEXCODE_ACCOUNTING = { "579D46", "366832", "98CD73" };
     private static string[] COLORHEXCODE_HUMANRESOURCES = { "904176", "5F284C", "D774AE" };
     private static string[] COLORHEXCODE_SALESANDMARKETING = { "99B14F", "79923B", "E6EEB8" };
@@ -14,8 +15,6 @@ public class ColorProvider
     private static string[] COLORHEXCODE_PROCUREMENT = { "BC9754", "7D6333", "FFD281" };
 
     public static string COLORHEXCODE_PRIMARYBEZELS = "333333";
-    public static string COLORHEXCODE_CONSTRUCTION = "666766";
-    public static string COLORHEXCODE_CONSTRUCTION_DARK = "333333";
     public static string COLORHEXCODE_LOGISTICS = "999999";
     public static string COLORHEXCODE_LOGISTICS_DARK = "666766";
 
@@ -28,7 +27,8 @@ public class ColorProvider
 
     public enum Department
     {
-        ACCOUNTING = 0,
+        CONSTRUCTION = 0,
+        ACCOUNTING,
         HUMANRESOURCES,
         SALESANDMARKETING,
         RESEARCHANDDEVELOPMENT,
@@ -39,6 +39,7 @@ public class ColorProvider
     //getColorFromHex(Colors[Department][ColorType])
     public static string[][] Colors =
     {
+        COLORHEXCODE_CONSTRUCTION,
         COLORHEXCODE_ACCOUNTING,
         COLORHEXCODE_HUMANRESOURCES,
         COLORHEXCODE_SALESANDMARKETING,

@@ -63,10 +63,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\UI\ColorProvider.cs" />
-    <Compile Include="Assets\UI\ExampleScript.cs" />
     <Compile Include="Assets\UI\RoundButtonController.cs" />
+    <Compile Include="Assets\UI\RoundButtonsMainMenuController.cs" />
     <Compile Include="Assets\UI\RoundButtonsMenuController.cs" />
     <Compile Include="Assets\UI\UIController.cs" />
+    <Compile Include="Assets\UI\UIFactory.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/crist/Desktop/MyProjects/CompanyGameRepository/UnityProject/CompanyGameR/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
