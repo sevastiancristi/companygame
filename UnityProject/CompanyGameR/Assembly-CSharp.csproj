@@ -66,6 +66,9 @@
     <Compile Include="Assets\UI\RoundButtonController.cs" />
     <Compile Include="Assets\UI\RoundButtonsMainMenuController.cs" />
     <Compile Include="Assets\UI\RoundButtonsMenuController.cs" />
+    <Compile Include="Assets\UI\SquareButtonController.cs" />
+    <Compile Include="Assets\UI\SquareButtonsMenuController.cs" />
+    <Compile Include="Assets\UI\SquareScrollButtonController.cs" />
     <Compile Include="Assets\UI\UIController.cs" />
     <Compile Include="Assets\UI\UIFactory.cs" />
     <Reference Include="Unity.Timeline.Editor">

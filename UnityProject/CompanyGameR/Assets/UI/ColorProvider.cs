@@ -12,11 +12,10 @@ public class ColorProvider
     private static string[] COLORHEXCODE_SALESANDMARKETING = { "99B14F", "79923B", "E6EEB8" };
     private static string[] COLORHEXCODE_RESEARCHANDDEVELOPMENT = { "5F3D7E", "482667", "A590B9" };
     private static string[] COLORHEXCODE_INFORMATIONTECHNOLOGY = { "36766D", "214E47", "70C9BE" };
+    private static string[] COLORHEXCODE_LOGISTICS = { "BC8055", "7D5233", "FAB380" };
     private static string[] COLORHEXCODE_PROCUREMENT = { "BC9754", "7D6333", "FFD281" };
 
     public static string COLORHEXCODE_PRIMARYBEZELS = "333333";
-    public static string COLORHEXCODE_LOGISTICS = "999999";
-    public static string COLORHEXCODE_LOGISTICS_DARK = "666766";
 
     public enum ColorType
     {
@@ -33,6 +32,7 @@ public class ColorProvider
         SALESANDMARKETING,
         RESEARCHANDDEVELOPMENT,
         INFORMATINOTECHNOLOGY,
+        LOGISTICS,
         PROCUREMENT
     }
 
@@ -45,6 +45,7 @@ public class ColorProvider
         COLORHEXCODE_SALESANDMARKETING,
         COLORHEXCODE_RESEARCHANDDEVELOPMENT,
         COLORHEXCODE_INFORMATIONTECHNOLOGY,
+        COLORHEXCODE_LOGISTICS,
         COLORHEXCODE_PROCUREMENT
     };
 

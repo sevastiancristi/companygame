@@ -2,6 +2,7 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - RoundButtonController
+    - RoundButtonsMainMenuController
     - RoundButtonsMenuController
     - UIController
     UnityEditor.Graphs.dll:
@@ -18,6 +19,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Text
   sceneClasses:
     Assets/Scenes/SampleScene.unity:
     - Class: 1
@@ -26,7 +28,11 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 20
       Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
     - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
@@ -45,10 +51,16 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9386}
     - Class: 114
+      Script: {instanceID: 9388}
+    - Class: 114
       Script: {instanceID: 10172}
     - Class: 114
       Script: {instanceID: 10490}
+    - Class: 114
+      Script: {instanceID: 10554}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -519,12 +531,6 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ExampleScript
-  - hash:
-      serializedVersion: 2
       Hash: 303ad70ce203ad874efe2965d0fbcff9
     assemblyName: Unity.Analytics.Tracker.dll
     namespaceName: UnityEngine.Analytics
@@ -709,6 +715,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SubMesh
+  - hash:
+      serializedVersion: 2
+      Hash: 6bc5207f3263185279ae9f95a3dd93e9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RoundButtonsMainMenuController
   - hash:
       serializedVersion: 2
       Hash: 8220b46879dc5e37db1b940c938f5744
