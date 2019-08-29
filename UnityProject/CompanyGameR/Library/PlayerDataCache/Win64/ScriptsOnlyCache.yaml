@@ -600,7 +600,7 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
-      Hash: 13b000a14a33af703702370ebbad4eac
+      Hash: 6b3c9422cd2ace7a900f1f2176ff8e9d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SquareButtonsMenuController

@@ -3,38 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SquareButtonsMenuController : MonoBehaviour
+public class SquareButtonsMenuController : AbstractButtonsMenuController
 {
-    public GameObject buttonGameObjectPrefab;
     public GameObject leftSquareScrollButtonPrefab;
     public GameObject rightSquareScrollButtonPrefab;
 
     private GameObject leftScrollGameObject;
     private GameObject rightScrollGameObject;
-    public List<GameObject> buttonsGameObjectList;
-
-    private int _buttonsCount = 0;
-    public int ButtonsCount
-    {
-        get => _buttonsCount;
-        set
-        {
-            adjustButtonsCount(value);
-            _buttonsCount = value;
-        }
-    }
-
-    private float _buttonSize = 0f;
-    public float ButtonSize
-    {
-        get => _buttonSize;
-        set
-        {
-            _buttonSize = value;
-            adjustButtonSize();
-        }
-    }
-
 
     private float _fadingBezelWidth = 0f;
     private float FadingBezelWidth
@@ -58,28 +33,6 @@ public class SquareButtonsMenuController : MonoBehaviour
         }
     }
 
-    private ColorProvider.Department _departmentColor;
-    public ColorProvider.Department DepartmentColor
-    {
-        get => _departmentColor;
-        set
-        {
-            _departmentColor = value;
-            adjustDepartmentColor();
-        }
-    }
-
-    private float _buttonHeight;
-    public float ButtonHeight
-    {
-        get => _buttonHeight;
-        set
-        {
-            _buttonHeight = value;
-            adjustButtonHeight();
-        }
-    }
-
     private float _faceBorderSize;
     public float FaceBorderSize
     {
@@ -88,17 +41,6 @@ public class SquareButtonsMenuController : MonoBehaviour
         {
             _faceBorderSize = value;
             adjustFaceBorderSize();
-        }
-    }
-
-    private float _bezelHeight;
-    public float BezelHeight
-    {
-        get => _bezelHeight;
-        set
-        {
-            _bezelHeight = value;
-            adjustBezelHeight();
         }
     }
 
@@ -113,75 +55,33 @@ public class SquareButtonsMenuController : MonoBehaviour
         }
     }
 
-    private bool _isExclusive = false;
-    public bool IsExclusive
-    {
-        get => _isExclusive;
-        set
-        {
-            if (_isExclusive == true)
-            {
-                Debug.LogError("Already set to exclusive!");
-                return;
-            }
-
-            if (value == false)
-                return;
-
-            setExclusive();
-        }
-    }
-
-    private Transform bezelTransform;
     private Transform leftFadingBezelTransform;
     private Transform rightFadingBezelTransform;
-    private Transform toplineBezelTransform;
     private Transform leftFadingToplineBezelTransform;
     private Transform rightFadingToplineBezelTransform;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        InitTransformMembers();
-        buttonsGameObjectList = new List<GameObject>();
-        
-        //TODO Remove testing
-        /*
-        ButtonsCount = 5;
-        ButtonSize = 30f;
-        ToplineBezelHeight = 2f;
-        DepartmentColor = ColorProvider.Department.HUMANRESOURCES;
-        ButtonHeight = 2f;
-        FaceBorderSize = 5f;
-        BezelHeight = 50f;
-        HasScrollingButtons = true;
-        IsExclusive = true;
-        */
+        base.Start();
 
     }
 
-    void InitTransformMembers()
+    protected override void InitTransformMembers()
     {
         bezelTransform = this.transform;
         leftFadingBezelTransform = this.transform.Find("LeftFadingBezel");
         rightFadingBezelTransform = this.transform.Find("RightFadingBezel");
-        toplineBezelTransform = this.transform.Find("ToplineDisplayBezel");
+        toplineDisplayBezelTransform = this.transform.Find("ToplineDisplayBezel");
         leftFadingToplineBezelTransform = this.transform.Find("ToplineDisplayBezel").Find("LeftFadingBezel");
         rightFadingToplineBezelTransform = this.transform.Find("ToplineDisplayBezel").Find("RightFadingBezel");
     }
 
-    void adjustButtonsCount(int value)
+    protected override void adjustButtonsCount(int value)
     {
-        if (_buttonsCount > 0)
-        {
-            Debug.LogError(this + ":\n ButtonsCount already set! Cannot set it twice!");
-            return;
-        }
-
-        InitTransformMembers();
-
-        leftScrollGameObject = Instantiate(leftSquareScrollButtonPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity, toplineBezelTransform);
-        rightScrollGameObject = Instantiate(rightSquareScrollButtonPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity, toplineBezelTransform);
+        base.adjustButtonsCount(value);
+        leftScrollGameObject = Instantiate(leftSquareScrollButtonPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity, toplineDisplayBezelTransform);
+        rightScrollGameObject = Instantiate(rightSquareScrollButtonPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity, toplineDisplayBezelTransform);
 
         //TODO: Remove testing!
         leftScrollGameObject.GetComponent<SquareScrollButtonController>().SelectCallback += () => { Debug.Log("Scrolling left!"); leftScrollGameObject.GetComponent<SquareScrollButtonController>().Unselect(); };
@@ -189,42 +89,32 @@ public class SquareButtonsMenuController : MonoBehaviour
         rightScrollGameObject.GetComponent<SquareScrollButtonController>().SelectCallback += () => { Debug.Log("Scrolling right!"); rightScrollGameObject.GetComponent<SquareScrollButtonController>().Unselect(); };
         rightScrollGameObject.GetComponent<SquareScrollButtonController>().UnselectCallback += () => { Debug.Log("Scrolling right done!"); };
 
-        for (int i = 0; i < value; i++)
-        {
-            GameObject go = Instantiate(buttonGameObjectPrefab, new Vector3(i, 0f, 0f), Quaternion.identity, toplineBezelTransform);
-            go.name = "Button_" + i;
-            buttonsGameObjectList.Add(go);
-
-            //TODO: Remove testing
-            go.GetComponent<SquareButtonController>().SelectCallback += () => { Debug.Log(go.name + " Selected!"); };
-            go.GetComponent<SquareButtonController>().UnselectCallback += () => { Debug.Log(go.name + " Unselected!"); };
-        }
     }
 
-    void adjustButtonSize()
+    protected override void adjustButtonSize()
     {
-        if (_buttonsCount <= 0)
+        if (ButtonsCount <= 0)
         {
             Debug.LogError(this + ":\n Buttons count must be set first!");
             return;
         }
 
         InitTransformMembers();
-        FadingBezelWidth = _buttonSize / 2;
+        FadingBezelWidth = ButtonSize / 2;
         Vector3 bezelSize = bezelTransform.GetComponent<RectTransform>().sizeDelta;
-        bezelSize.x = _buttonSize*_buttonsCount;
+        bezelSize.x = ButtonSize * ButtonsCount;
         bezelTransform.GetComponent<RectTransform>().sizeDelta = bezelSize;
 
-        leftScrollGameObject.transform.GetComponent<SquareScrollButtonController>().ButtonSize = _buttonSize;
-        rightScrollGameObject.transform.GetComponent<SquareScrollButtonController>().ButtonSize = _buttonSize;
+        leftScrollGameObject.transform.GetComponent<SquareScrollButtonController>().ButtonSize = ButtonSize;
+        rightScrollGameObject.transform.GetComponent<SquareScrollButtonController>().ButtonSize = ButtonSize;
 
         leftScrollGameObject.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, 0f, 0f);
         rightScrollGameObject.transform.GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, 0f, 0f);
 
         for (int i = 0; i < buttonsGameObjectList.Count; i++)
         {
-            buttonsGameObjectList[i].GetComponent<SquareButtonController>().ButtonSize = _buttonSize;
-            buttonsGameObjectList[i].GetComponent<RectTransform>().anchoredPosition =new Vector3(i*_buttonSize,0f,0f);
+            buttonsGameObjectList[i].GetComponent<SquareButtonController>().ButtonSize = ButtonSize;
+            buttonsGameObjectList[i].GetComponent<RectTransform>().anchoredPosition =new Vector3(i* ButtonSize, 0f,0f);
         }
 
     }
@@ -232,7 +122,7 @@ public class SquareButtonsMenuController : MonoBehaviour
 
     void adjustFadingBezelWidth()
     {
-        if (_buttonsCount <= 0 || _buttonSize <= 0f)
+        if (ButtonsCount <= 0 || ButtonSize <= 0f)
         {
             Debug.LogError(this + ":\n Buttons count, size and spacing must be set first!");
             return;
@@ -249,7 +139,7 @@ public class SquareButtonsMenuController : MonoBehaviour
 
     void adjustToplineBezelHeight()
     {
-        if (_buttonsCount <= 0)
+        if (ButtonsCount <= 0)
         {
             Debug.LogError(this + ":\n Buttons count must be set first!");
             return;
@@ -257,57 +147,38 @@ public class SquareButtonsMenuController : MonoBehaviour
 
         InitTransformMembers();
 
-        Vector3 toplineBezelSize = toplineBezelTransform.GetComponent<RectTransform>().sizeDelta;
+        Vector3 toplineBezelSize = toplineDisplayBezelTransform.GetComponent<RectTransform>().sizeDelta;
         toplineBezelSize.y = _toplineBezelHeight;
-        toplineBezelTransform.GetComponent<RectTransform>().sizeDelta = toplineBezelSize;
+        toplineDisplayBezelTransform.GetComponent<RectTransform>().sizeDelta = toplineBezelSize;
     }
 
-    void adjustDepartmentColor()
+    protected override void adjustDepartmentColor()
     {
-
-        if (_buttonsCount <= 0)
-        {
-            Debug.LogError(this + ":\n Buttons count must be set first!");
-            return;
-        }
+        base.adjustDepartmentColor();
 
         InitTransformMembers();
 
-        bezelTransform.GetComponent<Image>().color = ColorProvider.GetBezelColorFromHex(ColorProvider.Colors[(int)_departmentColor][(int)ColorProvider.ColorType.FACE]);
-        leftFadingBezelTransform.GetComponent<Image>().color = ColorProvider.GetBezelColorFromHex(ColorProvider.Colors[(int)_departmentColor][(int)ColorProvider.ColorType.FACE]);
-        rightFadingBezelTransform.GetComponent<Image>().color = ColorProvider.GetBezelColorFromHex(ColorProvider.Colors[(int)_departmentColor][(int)ColorProvider.ColorType.FACE]);
+        bezelTransform.GetComponent<Image>().color = ColorProvider.GetBezelColorFromHex(ColorProvider.Colors[(int)DepartmentColor][(int)ColorProvider.ColorType.FACE]);
+        leftFadingBezelTransform.GetComponent<Image>().color = ColorProvider.GetBezelColorFromHex(ColorProvider.Colors[(int)DepartmentColor][(int)ColorProvider.ColorType.FACE]);
+        rightFadingBezelTransform.GetComponent<Image>().color = ColorProvider.GetBezelColorFromHex(ColorProvider.Colors[(int)DepartmentColor][(int)ColorProvider.ColorType.FACE]);
 
-        leftScrollGameObject.transform.GetComponent<SquareScrollButtonController>().DepartmentColor = _departmentColor;
-        rightScrollGameObject.transform.GetComponent<SquareScrollButtonController>().DepartmentColor = _departmentColor;
-
-        for (int i = 0; i < buttonsGameObjectList.Count; i++)
-        {
-            buttonsGameObjectList[i].GetComponent<SquareButtonController>().DepartmentColor = _departmentColor;
-        }
+        leftScrollGameObject.transform.GetComponent<SquareScrollButtonController>().DepartmentColor = DepartmentColor;
+        rightScrollGameObject.transform.GetComponent<SquareScrollButtonController>().DepartmentColor = DepartmentColor;
     }
 
-    void adjustButtonHeight()
+    protected override void adjustButtonHeight()
     {
-        if (_buttonsCount <= 0)
-        {
-            Debug.LogError(this + ":\n Buttons count must be set first!");
-            return;
-        }
+        base.adjustButtonHeight();
 
         InitTransformMembers();
 
-        leftScrollGameObject.transform.GetComponent<SquareScrollButtonController>().ButtonHeight = _buttonHeight;
-        rightScrollGameObject.transform.GetComponent<SquareScrollButtonController>().ButtonHeight = _buttonHeight;
-
-        for (int i = 0; i < buttonsGameObjectList.Count; i++)
-        {
-            buttonsGameObjectList[i].GetComponent<SquareButtonController>().ButtonHeight = _buttonHeight;
-        }
+        leftScrollGameObject.transform.GetComponent<SquareScrollButtonController>().ButtonHeight = ButtonHeight;
+        rightScrollGameObject.transform.GetComponent<SquareScrollButtonController>().ButtonHeight = ButtonHeight;
     }
 
     void adjustFaceBorderSize()
     {
-        if(_buttonsCount <= 0 )
+        if(ButtonsCount <= 0 )
         {
             Debug.LogError(this + ":\n Buttons count must be set first!");
         }
@@ -317,36 +188,6 @@ public class SquareButtonsMenuController : MonoBehaviour
         for(int i = 0; i < buttonsGameObjectList.Count; i++)
         {
             buttonsGameObjectList[i].GetComponent<SquareButtonController>().FaceBorderSize = _faceBorderSize;
-        }
-    }
-
-    void adjustBezelHeight()
-    {
-        InitTransformMembers();
-
-        Vector3 bezelSize = bezelTransform.GetComponent<RectTransform>().sizeDelta;
-        bezelSize.y = _bezelHeight;
-        bezelTransform.GetComponent<RectTransform>().sizeDelta = bezelSize;
-    }
-
-    void setExclusive()
-    {
-        for (int i = 0; i < buttonsGameObjectList.Count; i++)
-        {
-            List<SquareButtonController> altList = new List<SquareButtonController>();
-            for (int j = 0; j < buttonsGameObjectList.Count; j++)
-            {
-                if (j == i)
-                    continue;
-                altList.Add(buttonsGameObjectList[j].GetComponent<SquareButtonController>());
-            }
-            buttonsGameObjectList[i].transform.GetComponent<SquareButtonController>().SelectCallback += () => {
-                for (int j = 0; j < altList.Count; j++)
-                {
-                    if (altList[j].IsSelected)
-                        altList[j].Unselect();
-                }
-            };
         }
     }
 
