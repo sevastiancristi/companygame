@@ -4,6 +4,9 @@ ScriptsOnlyBuild:
     - RoundButtonController
     - RoundButtonsMainMenuController
     - RoundButtonsMenuController
+    - SquareButtonController
+    - SquareButtonsMenuController
+    - SquareScrollButtonController
     - UIController
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
@@ -53,11 +56,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9388}
     - Class: 114
-      Script: {instanceID: 10172}
+      Script: {instanceID: 9866}
     - Class: 114
-      Script: {instanceID: 10490}
+      Script: {instanceID: 9920}
     - Class: 114
-      Script: {instanceID: 10554}
+      Script: {instanceID: 10176}
+    - Class: 114
+      Script: {instanceID: 10494}
+    - Class: 114
+      Script: {instanceID: 10534}
+    - Class: 114
+      Script: {instanceID: 10560}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -574,6 +583,12 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SquareButtonController
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.Analytics.Editor.dll
     namespaceName: UnityEditor.Analytics
     className: AnalyticsEventTrackerEditor
@@ -583,6 +598,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SpriteAnimator
+  - hash:
+      serializedVersion: 2
+      Hash: 13b000a14a33af703702370ebbad4eac
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SquareButtonsMenuController
   - hash:
       serializedVersion: 2
       Hash: 4fd8bf02e3089425d3502e26c44ba31a
@@ -693,7 +714,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 87d662d75c114a972361abaad1abd974
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UIController
@@ -709,6 +730,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_ColorGradient
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SquareScrollButtonController
   - hash:
       serializedVersion: 2
       Hash: 8649814970b42d345b89944b862453cc

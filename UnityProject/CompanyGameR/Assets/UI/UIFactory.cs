@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class UIFactory
 {
-    public static GameObject roundButtonPrefab = (GameObject)Resources.Load("UI/Prefabs/RoundButton", typeof(GameObject));
-    public static GameObject roundButtonsMenuPrefab = (GameObject)Resources.Load("UI/Prefabs/RoundButtonsMenu", typeof(GameObject));
-    public static GameObject squareButtonsMenuPrefab = (GameObject)Resources.Load("UI/Prefabs/SquareButtonsMenu", typeof(GameObject));
-    public static GameObject mainRoundButtonsMenuPrefab = (GameObject)Resources.Load("UI/Prefabs/RoundButtonsMainMenu", typeof(GameObject));
+    static GameObject roundButtonPrefab = (GameObject)Resources.Load("UI/Prefabs/RoundButton", typeof(GameObject));
+    static GameObject roundButtonsMenuPrefab = (GameObject)Resources.Load("UI/Prefabs/RoundButtonsMenu", typeof(GameObject));
+    static GameObject squareButtonsMenuPrefab = (GameObject)Resources.Load("UI/Prefabs/SquareButtonsMenu", typeof(GameObject));
+    static GameObject mainRoundButtonsMenuPrefab = (GameObject)Resources.Load("UI/Prefabs/RoundButtonsMainMenu", typeof(GameObject));
 
     public static GameObject CreateRoundButton(GameObject parent, ColorProvider.Department departmentColor, float buttonSize, float buttonHeight, float bezelWidth, float bezelHeight)
     {

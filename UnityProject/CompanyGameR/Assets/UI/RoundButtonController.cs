@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoundButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class RoundButtonController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     public Action SelectCallback;
     public Action UnselectCallback;
@@ -108,7 +108,7 @@ public class RoundButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
     }
 
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
@@ -157,6 +157,11 @@ public class RoundButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
         _isSelected = false;
     }
 
+    public void setFunctionSprite(Sprite sprite)
+    {
+        functionTransform.GetComponent<Image>().sprite = sprite;
+    }
+
     private void InitTransformMembers()
     {
         faceTransform = this.transform.Find("Face");
@@ -189,8 +194,6 @@ public class RoundButtonController : MonoBehaviour, IPointerEnterHandler, IPoint
         bezelTransform.GetComponent<Image>().color = faceColor;
         leftBezelTransform.GetComponent<Image>().color = faceColor;
         rightBezelTransform.GetComponent<Image>().color = faceColor;
-
-        
     }
 
     //This should always be recalled when resizing the UI

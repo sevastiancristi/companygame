@@ -305,4 +305,13 @@ public class RoundButtonsMenuController : MonoBehaviour
             };
         }
     }
+
+    private void exclusiveSelectCallback(List<RoundButtonController> buttonsList)
+    {
+        for (int j = 0; j < buttonsList.Count; j++)
+        {
+            if (buttonsList[j].IsSelected)
+                buttonsList[j].Unselect();
+        }
+    }
 }
